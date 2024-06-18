@@ -21,25 +21,22 @@ class Invoice extends Model
         'total_amount',
     ];
 
-    protected static function boot() : void
+    protected static function boot(): void
     {
         parent::boot();
 
-        static::creating(function($nvoice){
+        static::creating(function ($nvoice) {
             $nvoice->invoice_number = static::generateInvoiceNumber();
         });
     }
 
-    protected static function generateInvoiceNumber() : string
+    protected static function generateInvoiceNumber(): string
     {
-        return 'INV-' . str_pad(Invoice::count() + 1,5,'0',STR_PAD_LEFT);
+        return 'INV-'.str_pad(Invoice::count() + 1, 5, '0', STR_PAD_LEFT);
     }
 
-
-    public function services() : HasMany
+    public function services(): HasMany
     {
-        return $this->hasMany(Service::class,'invoice_id','id');
+        return $this->hasMany(Service::class, 'invoice_id', 'id');
     }
-
-
 }

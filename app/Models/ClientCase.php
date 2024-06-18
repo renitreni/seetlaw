@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -15,43 +14,43 @@ class ClientCase extends Model
 
     protected $fillable = [
         'case_number',
-        "case_plaintiff",
-        "case_defendant",
+        'case_plaintiff',
+        'case_defendant',
         'case_relation',
-        "case_type",
-        "case_status",
-        "case_description",
-        "case_docsready",
+        'case_type',
+        'case_status',
+        'case_description',
+        'case_docsready',
         'case_files',
-        "case_date"
+        'case_date',
     ];
 
-    protected static function boot() : void
+    protected static function boot(): void
     {
         parent::boot();
 
-        static::creating(function($case){
+        static::creating(function ($case) {
             $case->case_number = static::generateCaseNumber();
         });
     }
 
-    protected static function generateCaseNumber() : string
+    protected static function generateCaseNumber(): string
     {
-        return 'CASE-' . str_pad(ClientCase::count() + 1,5,'0',STR_PAD_LEFT);
+        return 'CASE-'.str_pad(ClientCase::count() + 1, 5, '0', STR_PAD_LEFT);
     }
 
-    public function court() : HasMany
+    public function court(): HasMany
     {
-        return $this->hasMany(ClientCourt::class,'case_id','id');
+        return $this->hasMany(ClientCourt::class, 'case_id', 'id');
     }
 
-    public function files() : HasMany
+    public function files(): HasMany
     {
-        return $this->hasMany(CaseFile::class,"case_id",'id');
+        return $this->hasMany(CaseFile::class, 'case_id', 'id');
     }
 
-    public function client() : HasOne
+    public function client(): HasOne
     {
-        return $this->hasOne(ClientInfo::class,"case_id","id");
+        return $this->hasOne(ClientInfo::class, 'case_id', 'id');
     }
 }

@@ -10,10 +10,10 @@ return new class extends Migration
     {
         Schema::create('client_courts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("case_id")->references("id")->on("client_cases")->onDelete("cascade");
-            $table->string("court_name")->nullable();
-            $table->string("court_address")->nullable();
-            $table->date("court_date")->nullable();
+            $table->foreignId('case_id')->references('id')->on('client_cases')->onDelete('cascade');
+            $table->string('court_name')->nullable();
+            $table->string('court_address')->nullable();
+            $table->date('court_date')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

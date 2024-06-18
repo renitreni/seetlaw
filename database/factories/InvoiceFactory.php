@@ -17,12 +17,12 @@ class InvoiceFactory extends Factory
     public function definition(): array
     {
         return [
-            "customer_name" => fake()->name(),
-            "customer_phone" => fake()->phoneNumber(),
-            "customer_address" => fake()->address(),
-            "sub_total" => fake()->randomFloat(2, 0, 1000),
-            "vat" => 0.15,
-            "total_amount" => fake()->randomFloat(2, 0, 1000),
+            'customer_name' => fake()->name(),
+            'customer_phone' => fake()->phoneNumber(),
+            'customer_address' => fake()->address(),
+            'sub_total' => fake()->randomFloat(2, 0, 1000),
+            'vat' => 0.15,
+            'total_amount' => fake()->randomFloat(2, 0, 1000),
         ];
     }
 }

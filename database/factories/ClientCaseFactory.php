@@ -15,15 +15,14 @@ class ClientCaseFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-{
-    return [
-        "case_title" => fake()->word(),
-        "case_category" => fake()->sentence(),
-        "case_status" => fake()->randomElement(['Won','Lose','Ongoing']),
-        "case_description" => fake()->sentence(),
-        "case_attorney" => fake()->name(),
-        "case_date" => fake()->dateTimeBetween('-1 years'),
-    ];
-}
-
+    {
+        return [
+            'case_title' => fake()->word(),
+            'case_category' => fake()->sentence(),
+            'case_status' => fake()->randomElement(['Won', 'Lose', 'Ongoing']),
+            'case_description' => fake()->sentence(),
+            'case_attorney' => fake()->name(),
+            'case_date' => fake()->dateTimeBetween('-1 years'),
+        ];
+    }
 }

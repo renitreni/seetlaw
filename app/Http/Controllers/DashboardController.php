@@ -14,17 +14,17 @@ class DashboardController extends Controller
     public function __invoke(MonthlyCase $chart)
     {
         $date = Carbon::now();
-        $schedules = ClientCourt::whereYear("court_date",$date->year)->whereMonth('court_date',$date->month)->whereDay("court_date",">",$date->day)->with('case')->get();
+        $schedules = ClientCourt::whereYear('court_date', $date->year)->whereMonth('court_date', $date->month)->whereDay('court_date', '>', $date->day)->with('case')->get();
         $totalCase = ClientCase::count();
         $totalPhotos = Gallery::count();
         $totalInvoice = Invoice::count();
 
-        return view('dashboard',['chart'=> $chart->build()])
-        ->with([
-            'scheds' => $schedules,
-            'totalCase' =>  $totalCase,
-            'totalPhotos' =>  $totalPhotos,
-            'totalInvoice' =>  $totalInvoice,
-        ]);
+        return view('dashboard', ['chart' => $chart->build()])
+            ->with([
+                'scheds' => $schedules,
+                'totalCase' => $totalCase,
+                'totalPhotos' => $totalPhotos,
+                'totalInvoice' => $totalInvoice,
+            ]);
     }
 }

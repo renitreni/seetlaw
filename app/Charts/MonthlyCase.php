@@ -5,7 +5,6 @@ namespace App\Charts;
 use App\Models\ClientCase;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Carbon\Carbon;
-use GuzzleHttp\Client;
 
 class MonthlyCase
 {
@@ -20,20 +19,20 @@ class MonthlyCase
     {
         $currentYear = Carbon::now()->year;
         $monthsName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        $months = range(1,12);
+        $months = range(1, 12);
         $totalCasePerMonth = [];
 
         foreach ($months as $month) {
-        $totalCasePerMonth[] = ClientCase::whereYear('case_date', $currentYear)
-                         ->whereMonth('case_date', $month)
-                         ->count();
-    }
+            $totalCasePerMonth[] = ClientCase::whereYear('case_date', $currentYear)
+                ->whereMonth('case_date', $month)
+                ->count();
+        }
 
         return $this->chart->lineChart()
             ->setTitle("Cases during {$currentYear}")
-            ->setColors(["#3e8e78"])
+            ->setColors(['#3e8e78'])
             ->setSubtitle('Total records per month of this current year.')
-            ->addData("Records",  $totalCasePerMonth)
-            ->setXAxis( $monthsName );
+            ->addData('Records', $totalCasePerMonth)
+            ->setXAxis($monthsName);
     }
 }

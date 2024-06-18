@@ -5,23 +5,28 @@ namespace App\Livewire\Invoice;
 use App\Models\Invoice;
 use Exception;
 use Illuminate\Support\Facades\Log;
-use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class Modal extends Component
 {
-
     #[Validate]
     public $services = [];
+
     #[Validate]
-    public string $customer_name = "";
+    public string $customer_name = '';
+
     #[Validate]
-    public string $customer_address = "";
+    public string $customer_address = '';
+
     #[Validate]
-    public string $customer_phone = "";
+    public string $customer_phone = '';
+
     public float $sub_total = 0;
+
     public float $vat = 0.15;
+
     public float $total_amount = 0;
 
     public function rules(): array
@@ -30,7 +35,7 @@ class Modal extends Component
             'customer_name' => 'required|min:3',
             'customer_address' => 'required|min:3',
             'customer_phone' => 'required',
-            'services.*' => 'required'
+            'services.*' => 'required',
         ];
     }
 
@@ -52,15 +57,15 @@ class Modal extends Component
         $this->total_amount = $this->sub_total + $vat_amount;
     }
 
-
     #[On('addService')]
     public function addService(): array
     {
         return $this->services[] = [
-            'service_name' => "",
-            'service_amount' => ""
+            'service_name' => '',
+            'service_amount' => '',
         ];
     }
+
     public function removeService(int $index): array
     {
 
@@ -68,6 +73,7 @@ class Modal extends Component
             unset($this->services[$index]);
         }
         $this->updatedServices();
+
         return $this->services;
     }
 
@@ -80,10 +86,12 @@ class Modal extends Component
             }
             $this->reset();
             $this->dispatch('invoice_created');
-            return session()->flash('success','Invoice created.');
+
+            return session()->flash('success', 'Invoice created.');
         } catch (Exception $exception) {
-            Log::error("@create_invoice",['msg'=>$exception->getMessage()]);
-            return session()->flash('failed','Failed to create invoice.');
+            Log::error('@create_invoice', ['msg' => $exception->getMessage()]);
+
+            return session()->flash('failed', 'Failed to create invoice.');
         }
     }
 

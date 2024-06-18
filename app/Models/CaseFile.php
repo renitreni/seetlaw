@@ -14,11 +14,11 @@ class CaseFile extends Model
         'case_id',
         'case_filename',
         'case_filepath',
-        'case_fileuploader'
+        'case_fileuploader',
     ];
 
-    public function case() : BelongsTo
+    public function case(): BelongsTo
     {
-        return $this->belongsTo(ClientCase::class,"case_id",'id');
+        return $this->belongsTo(ClientCase::class, 'case_id', 'id');
     }
 }

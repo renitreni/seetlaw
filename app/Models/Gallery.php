@@ -10,8 +10,8 @@ class Gallery extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        "image_uploader",
-        "image_path",
-        "image_name"
+        'image_uploader',
+        'image_path',
+        'image_name',
     ];
 }

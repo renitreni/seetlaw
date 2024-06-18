@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Arr;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Arr;
 
 class CaseRequest extends FormRequest
 {
@@ -35,11 +35,10 @@ class CaseRequest extends FormRequest
             'client_representative' => 'required',
             'client_email' => 'required',
             'client_mobile' => 'required',
-            'courts.*.row_id'=>"required",
-            'courts.*.court_name'=>"required",
-            'courts.*.court_address'=>"required",
-            'courts.*.court_date'=>"required",
-
+            'courts.*.row_id' => 'required',
+            'courts.*.court_name' => 'required',
+            'courts.*.court_address' => 'required',
+            'courts.*.court_date' => 'required',
 
         ];
     }
@@ -49,7 +48,7 @@ class CaseRequest extends FormRequest
         $data = $this->validated();
 
         return [
-            'caseData' => Arr::only($data, ['case_plaintiff', 'case_defendant', 'case_relation','case_type','case_status', 'case_description', 'case_docsready', 'case_date']),
+            'caseData' => Arr::only($data, ['case_plaintiff', 'case_defendant', 'case_relation', 'case_type', 'case_status', 'case_description', 'case_docsready', 'case_date']),
             'clientData' => Arr::only($data, ['client_company', 'client_representative', 'client_email', 'client_mobile']),
             'courtData' => $data['courts'] ?? [],
         ];
